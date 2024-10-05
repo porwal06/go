@@ -133,11 +133,18 @@ func MapExample() {
 	}
 	websites["Instagram"] = "instagram.com"
 	fmt.Println("MapExample:", websites)
+
+	// Define map using custom type
 	products := productCustomMapType{
 		"Keyboard": 99.99,
 		"Mouse":    59.99,
 	}
 	products.printMap()
+
+	// print map using for loop
+	for key, value := range products {
+		fmt.Println("Product key: ", key, "value: ", value)
+	}
 
 }
 func SliceExample() {
