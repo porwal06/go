@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	practice.PracticeList()
+	practice.PracticeList()     // Practice for array, slice, map
+	practice.PracticeFunction() // Practice for function
 
 }
 
