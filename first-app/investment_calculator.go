@@ -3,9 +3,16 @@ package main
 import (
 	"fmt"
 	"math"
+
+	"example.com/first-app/practice"
 )
 
 func main() {
+	practice.PracticeList()
+
+}
+
+func main_old() {
 	const inflationRate = 6
 	var investmentAmount float64
 	var investmentRate float64
@@ -28,4 +35,6 @@ func main() {
 	fmt.Println("Future Value: ", futureValue)
 	// fmt.Println("Future Value (adjusted for inflation): ", futureRealValue)
 	fmt.Printf("Future Value (adjusted for inflation): %.2f\n", futureRealValue)
+
+	practice.ListArray()
 }
