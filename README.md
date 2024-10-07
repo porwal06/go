@@ -1,4 +1,4 @@
-# go
+# Learn GO using some demo app
 
 Find list of demo GO application
 
