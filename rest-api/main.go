@@ -23,7 +23,12 @@ func main() {
 
 func getEvents(c *gin.Context) {
 	// c.JSON serializes the given struct as JSON and returns it to the client
-	c.JSON(http.StatusOK, modules.GetAllEvents())
+	events, err := modules.GetAllEvents()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
+	}
+	c.JSON(http.StatusOK, events)
 }
 
 func saveEvent(c *gin.Context) {
@@ -34,6 +39,10 @@ func saveEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
-	event.Save()
-	c.JSON(http.StatusCreated, gin.H{"message": "Event successfully created", "event": event})
+	err = event.Save()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Sorry couldn't save event, please try again later", "error": err})
+		return
+	}
+	c.JSON(http.StatusCreated, gin.H{"message": "Event successfully created", "events": event})
 }
