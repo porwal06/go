@@ -12,11 +12,8 @@ func GenerateHashPassword(password string) string {
 	return string(hashedPassword)
 }
 
-func VarifyHashPassword(hashedPassword string, password string) bool {
+func CompareHashPassword(hashedPassword, password string) bool {
 	// Compare the hashed password with the provided password
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
-	if err != nil {
-		return false
-	}
-	return hashedPassword == password
+	return err == nil
 }

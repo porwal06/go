@@ -1,6 +1,8 @@
 package modals
 
 import (
+	"errors"
+
 	"example.com/rest-api/db"
 	"example.com/rest-api/utils"
 )
@@ -38,6 +40,19 @@ func (u User) Save() error {
 }
 
 func (u User) Login() error {
+	//Get password from email address
+	query := `SELECT password FROM users WHERE email = ?`
+	//Execute query
+	row := db.DB.QueryRow(query, u.Email)
+	//Get password from row
+	var hashedPassword string
+	err := row.Scan(&hashedPassword)
+	if err != nil {
+		return errors.New("didn't find the credential")
+	}
+	//Compare password with hashed password
+	if !utils.CompareHashPassword(hashedPassword, u.Password) {
+		return errors.New("invalid credential--" + hashedPassword + "--Password--" + u.Password)
+	}
 	return nil
-
 }
