@@ -1,4 +1,4 @@
-package modules
+package modals
 
 import (
 	"example.com/rest-api/db"

@@ -4,13 +4,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"example.com/rest-api/modules"
+	"example.com/rest-api/modals"
 	"github.com/gin-gonic/gin"
 )
 
 func getEvents(c *gin.Context) {
 	// c.JSON serializes the given struct as JSON and returns it to the client
-	events, err := modules.GetAllEvents()
+	events, err := modals.GetAllEvents()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		return
@@ -19,7 +19,7 @@ func getEvents(c *gin.Context) {
 }
 
 func saveEvent(c *gin.Context) {
-	var event modules.Event
+	var event modals.Event
 	// c.BindJSON deserializes the JSON body and stores it in the value pointed to by event
 	err := c.ShouldBindJSON(&event)
 	if err != nil {
@@ -40,7 +40,7 @@ func getEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
-	event, err := modules.GetEventByID(id)
+	event, err := modals.GetEventByID(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"message": "Event not found"})
 		return
@@ -54,8 +54,8 @@ func updateEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
-	var event modules.Event
-	event, err = modules.GetEventByID(id)
+	var event modals.Event
+	event, err = modals.GetEventByID(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
@@ -81,8 +81,8 @@ func deleteEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
-	var event modules.Event
-	event, err = modules.GetEventByID(id)
+	var event modals.Event
+	event, err = modals.GetEventByID(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return

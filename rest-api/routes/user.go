@@ -3,13 +3,13 @@ package routes
 import (
 	"net/http"
 
-	"example.com/rest-api/modules"
+	"example.com/rest-api/modals"
 	"github.com/gin-gonic/gin"
 )
 
 // User struct with id, email, password
 func registerUser(context *gin.Context) {
-	var user modules.User
+	var user modals.User
 
 	err := context.ShouldBindJSON(&user)
 	if err != nil {
@@ -26,7 +26,7 @@ func registerUser(context *gin.Context) {
 }
 
 func loginUser(context *gin.Context) {
-	var user modules.User
+	var user modals.User
 
 	err := context.ShouldBindJSON(&user)
 	if err != nil {
