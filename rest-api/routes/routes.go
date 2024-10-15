@@ -9,4 +9,7 @@ func RouteList(r *gin.Engine) {
 	r.POST("/event", saveEvent)
 	r.PUT("/event/:id", updateEvent)
 	r.DELETE("/event/:id", deleteEvent)
+
+	r.POST("/user/register", registerUser)
+	r.POST("/user/login", loginUser)
 }
